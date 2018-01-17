@@ -1,0 +1,196 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "webshop",
+        "values": [
+          {
+            "id": "4",
+            "name": {
+              "value": "Austria",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "1",
+            "name": {
+              "value": "Germany",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "7",
+            "name": {
+              "value": "Italy",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "2",
+            "name": {
+              "value": "France",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "6",
+            "name": {
+              "value": "Belgium",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "3",
+            "name": {
+              "value": "Netherlands",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "8",
+            "name": {
+              "value": "Fashion for Home",
+              "synonyms": []
+            }
+          },
+          {
+            "id": "5",
+            "name": {
+              "value": "Switzerland",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "EnableAppDomain",
+        "samples": [
+          "Enable SAP for {webshop}",
+          "Enable SAP for {webshop} with authentication code {primaryAuthenticationCode}",
+          "Enable SAP for {webshop} with authentication code {primaryAuthenticationCode} and {secondaryAuthenticationCode}"
+        ],
+        "slots": [
+          {
+            "name": "webshop",
+            "type": "webshop",
+            "samples": [
+              "{webshop}",
+              "For {webshop}"
+            ]
+          },
+          {
+            "name": "primaryAuthenticationCode",
+            "type": "AMAZON.Drink",
+            "samples": [
+              "{primaryAuthenticationCode}",
+              "My primary authentication code is {primaryAuthenticationCode}",
+              "Authentication code {primaryAuthenticationCode}"
+            ]
+          },
+          {
+            "name": "secondaryAuthenticationCode",
+            "type": "AMAZON.Animal",
+            "samples": [
+              "My secondary authentication code is {secondaryAuthenticationCode}",
+              "Authentication code {secondaryAuthenticationCode}",
+              "{secondaryAuthenticationCode}"
+            ]
+          }
+        ]
+      }
+    ],
+    "invocationName": "sap release"
+  },
+  "prompts": [
+    {
+      "id": "Confirm.Intent-EnableAppDomain",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Ok. Do you really want to release SAP for {webshop} now?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-EnableAppDomain.IntentSlot-webshop",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "For which country do you want to enable SAP?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-EnableAppDomain.IntentSlot-primaryAuthenticationCode",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Please enter your primary authentication code."
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-EnableAppDomain.IntentSlot-secondaryAuthenticationCode",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Now please enter your secondary authentication code."
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "intents": [
+      {
+        "name": "EnableAppDomain",
+        "confirmationRequired": true,
+        "prompts": {
+          "confirmation": "Confirm.Intent-EnableAppDomain"
+        },
+        "slots": [
+          {
+            "name": "webshop",
+            "type": "webshop",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-EnableAppDomain.IntentSlot-webshop"
+            }
+          },
+          {
+            "name": "primaryAuthenticationCode",
+            "type": "AMAZON.Drink",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-EnableAppDomain.IntentSlot-primaryAuthenticationCode"
+            }
+          },
+          {
+            "name": "secondaryAuthenticationCode",
+            "type": "AMAZON.Animal",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicitation": "Elicit.Intent-EnableAppDomain.IntentSlot-secondaryAuthenticationCode"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
